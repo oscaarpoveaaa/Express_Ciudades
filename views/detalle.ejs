@@ -1,35 +1,41 @@
 <%- include('template/cabecera', {tituloWeb: "Detalle"})%>
 <div class="container">
-  <h1>Detalles del Pokémon</h1>
+  <h1>Detalles de la ciudad</h1>
   <% if (error) { %> <%= mensaje %>
   <a href="/" class="btn btn-dark btn-block my-2"> Volver</a>
   <% } %> <% if (!error) { %>
     <form id="editar" data-id="<%= ciudad._id %>" class="my-2" method="POST">
+      <h4>ID:</h4>
       <input type="number" placeholder="<%= ciudad.id %>" class="form-control my-2" name="id" >
+      <h4>Nombre:</h4>
       <input
         type="text"
         placeholder="<%= ciudad.nombre %>"
         class="form-control my-2"
         name="nombre"
       />
+      <h4>Población:</h4>
       <input
         type="text"
         placeholder="<%= ciudad.poblacion %>"
         class="form-control my-2"
         name="poblacion"
       />
+      <h4>País:</h4>
       <input
         type="text"
         placeholder="<%= ciudad.pais %>"
         class="form-control my-2"
         name="pais"
       />
+      <h4>Continente:</h4>
       <input
         type="text"
         placeholder="<%= ciudad.continente %>"
         class="form-control my-2"
         name="continente"
       />
+      <h4>Gentilicio:</h4>
       <input
         type="text"
         placeholder="<%= ciudad.gentilicio %>"

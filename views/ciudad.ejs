@@ -1,0 +1,58 @@
+<%- include('template/cabecera', {tituloWeb: "Panel de Administración"})%>
+
+<div class="container">
+  <h1>CIUDADES</h1>
+  <a class="btn btn-success btn-block my-4" href="/crear">AÑADIR NUEVA CIUDAD</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Poblacion</th>
+        <th scope="col">País</th>
+        <th scope="col">Continente</th>
+        <th scope="col">Gentilicio</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(arrayCiudad.length > 0){ %> <% arrayCiudad.forEach(ciudad => { %>
+      <tr>
+        <th scope="row"><%= ciudad.id %></th>
+        <td><%= ciudad.nombre %></td>
+        <td><%= ciudad.poblacion %></td>
+        <td><%= ciudad.pais %></td>
+        <td><%= ciudad.continente %></td>
+        <td><%= ciudad.gentilicio %></td>
+        <td><a class="btn btn-warning btn-sm" href="/<%= ciudad._id %>">Editar</a></td>
+        <td><button class="btn btn-danger btn-sm" data-id="<%= ciudad._id %>" onclick="borrar(this)">Eliminar</button></td>
+      </tr>
+      <tr>
+        <% })} %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%- include("template/footer") %>
+
+<script>
+ async function borrar(btnEliminar){
+    console.log(btnEliminar.dataset.id)
+    try {
+      const data = await fetch(`/${btnEliminar.dataset.id}` , {
+        method: 'delete'
+      })
+      const res = await data.json()
+      console.log(res)
+      if(res.estado){
+        window.location.href = '/'
+      }else{
+        console.log(res)
+      }
+    }catch(error){
+      console.log(error)
+    }
+ }
+</script>

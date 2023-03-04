@@ -1,0 +1,70 @@
+<%- include('template/cabecera', {tituloWeb: "Detalle"})%>
+<div class="container">
+  <h1>Detalles del Pokémon</h1>
+  <% if (error) { %> <%= mensaje %>
+  <a href="/" class="btn btn-dark btn-block my-2"> Volver</a>
+  <% } %> <% if (!error) { %>
+    <form id="editar" data-id="<%= ciudad._id %>" class="my-2" method="POST">
+      <input type="number" placeholder="<%= ciudad.id %>" class="form-control my-2" name="id" >
+      <input
+        type="text"
+        placeholder="<%= ciudad.nombre %>"
+        class="form-control my-2"
+        name="nombre"
+      />
+      <input
+        type="text"
+        placeholder="<%= ciudad.poblacion %>"
+        class="form-control my-2"
+        name="poblacion"
+      />
+      <input
+        type="text"
+        placeholder="<%= ciudad.pais %>"
+        class="form-control my-2"
+        name="pais"
+      />
+      <input
+        type="text"
+        placeholder="<%= ciudad.continente %>"
+        class="form-control my-2"
+        name="continente"
+      />
+      <input
+        type="text"
+        placeholder="<%= ciudad.gentilicio %>"
+        class="form-control my-2"
+        name="gentilicio"
+      />
+      <button type="submit" class="btn btn-success btn-sm" type="submit">Actualizar</button>
+    </form>
+  <% } %>
+</div>
+<%- include("template/footer") %>
+
+<script>
+  const formEditar = document.querySelector('#editar');
+    formEditar.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const id = formEditar.elements['id'].value
+      const nombre = formEditar.elements['nombre'].value
+      const poblacion = formEditar.elements['poblacion'].value
+      const pais = formEditar.elements['pais'].value
+      const continente = formEditar.elements['continente'].value
+      const gentilicio = formEditar.elements['gentilicio'].value
+      const _id = formEditar.dataset.id
+      const data = await fetch(`/${_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id,nombre,poblacion,pais,continente,gentilicio})
+      })
+      const res = await data.json()
+      if(res.estado){
+        window.location.href = '/'
+      }else{
+        console.log(res)
+      }
+    })
+</script>

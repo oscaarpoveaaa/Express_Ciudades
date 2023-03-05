@@ -16,7 +16,7 @@
       />
       <h4>Población:</h4>
       <input
-        type="text"
+        type="number"
         placeholder="<%= ciudad.poblacion %>"
         class="form-control my-2"
         name="poblacion"
@@ -29,12 +29,15 @@
         name="pais"
       />
       <h4>Continente:</h4>
-      <input
-        type="text"
-        placeholder="<%= ciudad.continente %>"
-        class="form-control my-2"
-        name="continente"
-      />
+      <select class="form-select" aria-label="Default select example" name="continente">
+        <option value="none" selected disabled>Continente</option>
+        <option value="Asia">ASIA</option>
+        <option value="América">AMÉRICA</option>
+        <option value="África">ÁFRICA</option>
+        <option value="Antártida">ANTÁRTIDA</option>
+        <option value="Europa">EUROPA</option>
+        <option value="Oceanía">OCEANÍA</option>
+      </select>
       <h4>Gentilicio:</h4>
       <input
         type="text"
